@@ -19,11 +19,16 @@ export const useStyles = makeStyles({
         marginTop: '5px ',
         cursor: 'pointer',
         display: 'flex',
-        alignItems: 'flex-end',
+        alignItems: 'baseline',
         '& .MuiTypography-root': {
             display: 'inherit',
             marginLeft: '5px',
             width: 'fit-content',
         }
+    },
+    linkGroup: {
+        display:'flex',
+        alignItems: 'baseline',
+        flexDirection: 'column'
     }
 })

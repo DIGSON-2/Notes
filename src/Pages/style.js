@@ -26,6 +26,8 @@ export const useStyles = makeStyles({
     },
     send: {
         background: `${teal[700]} !important `,
+        color: 'white',
+        marginBottom: '5px',
         '&:disabled': {
             color: 'black',
             backgroundColor: '#0000001f !important'
@@ -34,4 +36,8 @@ export const useStyles = makeStyles({
     title: {
         marginBottom: '20px !important'
     },
+    buttonGroup: {
+        display: 'flex',
+        flexDirection: 'column',
+    }
 })

@@ -11,9 +11,9 @@ export const Footer = () => {
         <Typography variant='body 2'>
           its original app created by Andranik Baldryan <br /> my contacts{" "}
         </Typography>
-        <div>
+        <div className={classes.linkGroup}>
         {myLinks.map((el) => (
-            <Link className={classes.link} href={el.url}>
+            <Link className={classes.link} href={el.url} key={el.key}>
               {el.icon}
               <Typography variant='body 2'>{el.text + (el.label ? el.label : '')}</Typography>
             </Link>
