@@ -19,7 +19,7 @@ export const useStyles = makeStyles({
         marginTop: '5px ',
         cursor: 'pointer',
         display: 'flex',
-        alignItems: 'baseline',
+        alignItems: 'flex-end',
         '& .MuiTypography-root': {
             display: 'inherit',
             marginLeft: '5px',
