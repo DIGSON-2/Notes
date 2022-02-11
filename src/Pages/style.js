@@ -26,7 +26,7 @@ export const useStyles = makeStyles({
     },
     send: {
         background: `${teal[700]} !important `,
-        color: 'white',
+        color: 'white !important',
         marginBottom: '5px',
         '&:disabled': {
             color: 'black',
@@ -39,5 +39,52 @@ export const useStyles = makeStyles({
     buttonGroup: {
         display: 'flex',
         flexDirection: 'column',
+        justifyContent: 'space-between',
+        height: '80px'
+    },
+    cardGroup:{
+        display: 'flex',
+        flexWrap: 'wrap',
+        justifyContent: 'center'
+    },
+    cardStyle:{
+        padding: '20px',
+        width: '200px',
+        margin: '30px',
+        border: '2px solid purple'
+    },
+
+    header:{
+        background: teal[500],
+        borderBottom: '1px solid black',
+        padding: '10px 0px',
+        '& div': {
+            display: 'flex',
+            justifyContent: 'space-between',
+            '& .MuiButton-root':{
+                color: 'white !important'
+            },
+            '& .MuiButton-root:hover':{
+                color: 'blue !important',
+            },
+        }
+    },
+    search: {
+        background: 'white',
+        borderRadius: '5px'
+    },
+    cardButtonsGroup:{
+        display: 'flex',
+        justifyContent: 'space-between',
+        marginTop: '20px',
+    },
+    cardButton:{
+        marginTop: '10px !important',
+        width: '100%',
+        paddingTop: '0px'
+    },
+    conteiner: {
+        width: '1200px',
+        margin: 'auto'
     }
 })

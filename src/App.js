@@ -6,18 +6,9 @@ import HomePage from "./Pages/HomePage";
 import Layout from "./Layout/Layout";
 import Register from "./Pages/Register";
 import Auth from "./Pages/Auth";
-import { getData } from "./Server/query";
-
 function App() {
-  const [data, setData] = useState("");
-
-  useEffect(()=>{
-    getData(setData)
-  },[])
-
-
   return (
-    <ThemeContext.Provider value={{ data }}>
+    <ThemeContext.Provider value={{  }}>
       <Routes>
         <Route path="/Authorization" element={<Auth />} />
         <Route path="/Register" element={<Register />} />

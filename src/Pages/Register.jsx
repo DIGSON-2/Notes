@@ -1,30 +1,40 @@
 import { Formik } from "formik";
 import * as yup from "yup";
 import { Button, TextField, Typography } from "@mui/material";
-import React, { useContext, useState } from "react";
-import { ThemeContext } from "../App";
+import React, { useEffect, useState } from "react";
 import { useStyles } from "./style";
 import { useNavigate,Navigate } from "react-router-dom";
+import { nanoid } from 'nanoid';
+import { addUser, getUsers } from "../Server/query";
 
 const Register = () => {
-  const { root, form, send, title } = useStyles();
-  const { addUser } = useContext(ThemeContext);
-  const [userInfo, setUserInfo] = useState({});
+  const { root, form, send, title , buttonGroup} = useStyles();
+  const [users,setUsers] = useState([])
+  const [names,setNames] = useState([])
+  let [userInfo, setUserInfo] = useState({});
   const navigate = useNavigate();
-  if('yes' === localStorage.getItem('Auth')) return <Navigate to='/'/>
+  useEffect(() => {
+    getUsers(setUsers)
+  },[])
+  if(localStorage.Token) return <Navigate to='/'/>
   const validationSchema = yup.object().shape({
-    name: yup.string().trim().required("Must be"),
-    password: yup.string().trim().required("Must be"),
+    name: yup.string().required('ERROR: The name is required!'),
+    password: yup
+    .string()
+    .required('ERROR: The password is required!')
+    .matches(
+      /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/,
+      "Must Contain 8 Characters, One Uppercase, One Lowercase, One Number and One Special Case Character"
+    ),
     confirmPassword: yup
       .string()
-      .trim()
       .oneOf([yup.ref("password")], "Password mismatch")
-      .required("Must be"),
-    email: yup.string().email("Please enter true email").required(),
+      .required("ERROR: The confirm password is required!"),
+    email: yup.string().email("Please enter true email").required('ERROR: The email is required!'),
     confirmEmail: yup
       .string()
       .oneOf([yup.ref("email")], "email mismatch")
-      .required("Must be"),
+      .required("ERROR: The confrim email is required!"),
   });
   return (
     <div className={root}>
@@ -43,9 +53,10 @@ const Register = () => {
             prev.name = values.name;
             prev.email = values.email;
             prev.password = values.password;
+            prev.token = nanoid()
           });
           addUser(userInfo);
-          alert("Your account was register");
+          localStorage.setItem('Token', userInfo.token)
           navigate("/");
         }}
       >
@@ -107,6 +118,7 @@ const Register = () => {
               placeholder="Please confirm your email"
               helperText={touched.confirmEmail && errors.confirmEmail}
             ></TextField>
+            <div className={buttonGroup}>
             <Button
               variant="contained"
               disabled={!isValid && !dirty}
@@ -123,6 +135,7 @@ const Register = () => {
             >
               Sing In
             </Button>
+            </div>
           </form>
         )}
       </Formik>

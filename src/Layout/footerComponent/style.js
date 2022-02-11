@@ -4,7 +4,7 @@ import { makeStyles } from '@mui/styles';
 export const useStyles = makeStyles({
     root: {
         position: 'absolute',
-        background: teal[700],
+        background: teal[500],
         width: '100%',
         padding: '10px 0px',
         borderTop: '1px solid black',
