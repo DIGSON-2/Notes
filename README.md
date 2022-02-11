@@ -1,2 +1,2 @@
 # Notes
-first hard React web site 
+first hard React web site (all code be in dev branch)
