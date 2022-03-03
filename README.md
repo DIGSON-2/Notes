@@ -8,6 +8,6 @@ Mui components:
   yarn add @mui/material @mui/styled-engine-sc styled-components
   yarn add @mui/icons-material
   yarn add @mui/styles
-create server host: 3006 and run it 
-you must have localhost:3006/users and localhost:3006/cards
+use json-server -p 3006 -w db.json
+and yarn start
 this app has been created by Andranik Baldryan 
