@@ -10,7 +10,6 @@ import { addUser, getUsers } from "../Server/query";
 const Register = () => {
   const { root, form, send, title , buttonGroup} = useStyles();
   const [users,setUsers] = useState([])
-  const [names,setNames] = useState([])
   let [userInfo, setUserInfo] = useState({});
   const navigate = useNavigate();
   useEffect(() => {

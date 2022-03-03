@@ -12,7 +12,7 @@ const Auth = () => {
   const navigation = useNavigate();
   useEffect(() => {
     getUsers(setUsers)
-  })
+  },[])
   if (localStorage.Token) return <Navigate to='/' />
   const validationSchema = yup.object().shape({
     name: yup.string().required("ERROR: The name is required!"),

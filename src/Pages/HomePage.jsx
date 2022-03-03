@@ -76,7 +76,6 @@ const HomePage = () => {
               </div>
             </Card>
           ) : null}
-
         </div>
       </div>
       <DialogForAddCard open={openAddDialog} onClose={handleClickClose} id={user?.id} />

@@ -3,7 +3,7 @@ const getUsers = async (callback) => {
   const url = "http://localhost:3006/users";
   const resp = await fetch(url);
   const respData = await resp.json();
-
+  
   callback(respData);
 };
 
