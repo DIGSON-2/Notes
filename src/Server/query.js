@@ -1,18 +1,26 @@
-
-const getUsers = async (callback) => {
+const getUsersData = async (callback) => {
   const url = "http://localhost:3006/users";
   const resp = await fetch(url);
   const respData = await resp.json();
-  
+
   callback(respData);
 };
+const getUser = async (callback, token) => {
+  const url = "http://localhost:3006/users";
+  const resp = await fetch(url);
+  const respData = await resp.json();
+  const user = await respData.find((el) => el.token ===  token)
+  if (!user) return
+  const cards = await getCardFromUser(user.id)
+  callback({ user, cards });
+};
 
-const getCardFromUser = async (id, callback) => {
+const getCardFromUser = async (id) => {
   const url = `http://localhost:3006/users/${id}/cards`
   const resp = await fetch(url);
   const respData = await resp.json();
 
-  callback(respData)
+  return respData
 }
 
 
@@ -35,7 +43,7 @@ const removeCard = async (id) => {
       method: "DELETE",
     })
 };
-const changeCard = async (id,obj) => {
+const changeCard = async (id, obj) => {
   const url = `http://localhost:3006/cards/${id}`;
   await fetch(url,
     {
@@ -62,4 +70,4 @@ const addUser = async (obj) => {
     })
 };
 
-export { getUsers, addCard, addUser, getCardFromUser, removeCard ,changeCard};
+export { getUser, getUsersData, addCard, addUser, removeCard, changeCard };

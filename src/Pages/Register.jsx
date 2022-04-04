@@ -5,7 +5,7 @@ import React, { useEffect, useState } from "react";
 import { useStyles } from "./style";
 import { useNavigate,Navigate } from "react-router-dom";
 import { nanoid } from 'nanoid';
-import { addUser, getUsers } from "../Server/query";
+import { addUser, getUsersData } from "../Server/query";
 
 const Register = () => {
   const { root, form, send, title , buttonGroup} = useStyles();
@@ -13,11 +13,15 @@ const Register = () => {
   let [userInfo, setUserInfo] = useState({});
   const navigate = useNavigate();
   useEffect(() => {
-    getUsers(setUsers)
+    getUsersData(setUsers)
   },[])
   if(localStorage.Token) return <Navigate to='/'/>
   const validationSchema = yup.object().shape({
-    name: yup.string().required('ERROR: The name is required!'),
+    name: yup
+    .string()
+    .required('ERROR: The name is required!')
+    .test('Name', 'This Name has been used' , val => !users.find(el => el.name === val ))  
+    ,
     password: yup
     .string()
     .required('ERROR: The password is required!')
@@ -29,11 +33,6 @@ const Register = () => {
       .string()
       .oneOf([yup.ref("password")], "Password mismatch")
       .required("ERROR: The confirm password is required!"),
-    email: yup.string().email("Please enter true email").required('ERROR: The email is required!'),
-    confirmEmail: yup
-      .string()
-      .oneOf([yup.ref("email")], "email mismatch")
-      .required("ERROR: The confrim email is required!"),
   });
   return (
     <div className={root}>
@@ -42,15 +41,12 @@ const Register = () => {
           name: "",
           password: "",
           confirmPassword: "",
-          email: "",
-          confirmEmail: "",
         }}
         validateOnChange
         validationSchema={validationSchema}
         onSubmit={(values) => {
           setUserInfo((prev) => {
             prev.name = values.name;
-            prev.email = values.email;
             prev.password = values.password;
             prev.token = nanoid()
           });
@@ -98,24 +94,6 @@ const Register = () => {
               value={values.confirmPassword}
               placeholder="Please confirm your password"
               helperText={touched.confirmPassword && errors.confirmPassword}
-            ></TextField>
-            <TextField
-              name="email"
-              type="email"
-              onChange={handleChange}
-              onBlur={handleBlur}
-              value={values.email}
-              placeholder="Please enter your email"
-              helperText={touched.email && errors.email}
-            ></TextField>
-            <TextField
-              name="confirmEmail"
-              type="email"
-              onChange={handleChange}
-              onBlur={handleBlur}
-              value={values.confirmEmail}
-              placeholder="Please confirm your email"
-              helperText={touched.confirmEmail && errors.confirmEmail}
             ></TextField>
             <div className={buttonGroup}>
             <Button

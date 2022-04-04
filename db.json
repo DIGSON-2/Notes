@@ -4,19 +4,16 @@
       "id": 1,
       "name": "Andranik",
       "password": "Test*7234",
-      "email": "test@mail.ru",
       "token": "1656486316484517"
     },
     {
       "name": "asdfasfa",
-      "email": "asd@mail.ru",
       "password": "!Akasudfhsakldmn565",
       "token": "sAobfhsSEetRlbrO-30tI",
       "id": 6
     },
     {
       "name": "Ani",
-      "email": "anibaldryan@gmail.com",
       "password": "a708707A$",
       "token": "FywI4qvO0j35no1VIJsws",
       "id": 7
@@ -36,8 +33,8 @@
       "id": 3
     },
     {
-      "name": "Levon",
-      "number": 947140,
+      "name": "asdasdjsdna.sd ",
+      "number": 816,
       "userId": 1,
       "id": 4
     }

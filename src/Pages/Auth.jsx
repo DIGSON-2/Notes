@@ -4,18 +4,21 @@ import { Button, TextField, Typography } from "@mui/material";
 import { useStyles } from "./style";
 import * as yup from "yup";
 import { useNavigate, Navigate } from "react-router-dom";
-import { getUsers } from "../Server/query";
+import { getUsersData } from "../Server/query";
 
 const Auth = () => {
   const { root, form, send, title, buttonGroup } = useStyles();
-  const [users, setUsers] = useState([]);
+  const [users , setUsers] = useState([]);
   const navigation = useNavigate();
   useEffect(() => {
-    getUsers(setUsers)
+    getUsersData(setUsers)
   },[])
-  if (localStorage.Token) return <Navigate to='/' />
+  if (users.find(el => el.token === localStorage.Token)) return <Navigate to='/' />
   const validationSchema = yup.object().shape({
-    name: yup.string().required("ERROR: The name is required!"),
+    name: yup
+    .string()
+    .required("ERROR: The name is required!")
+    ,
     password: yup
       .string()
       .required('ERROR: The password is required!')
