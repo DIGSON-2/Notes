@@ -7,8 +7,9 @@ import { useNavigate, Navigate } from "react-router-dom";
 import { getUsersData } from "../Server/query";
 
 const Auth = () => {
-  const { root, form, send, title, buttonGroup } = useStyles();
+  const { root, form, send, title, buttonGroup, errorLabel } = useStyles();
   const [users , setUsers] = useState([]);
+  const [isError, setIsError] = useState(false)
   const navigation = useNavigate();
   useEffect(() => {
     getUsersData(setUsers)
@@ -35,13 +36,14 @@ const Auth = () => {
         validationSchema={validationSchema}
         onSubmit={(values) => {
           const userNameIndex = users.findIndex((el) => el.name === values.name);
-          if (userNameIndex !== -1) {
-            if (users[userNameIndex].password === values.password) {
+          if (userNameIndex !== -1 && users[userNameIndex].password === values.password) {
               localStorage.setItem('Token', `${users[userNameIndex].token}`)
               navigation("/");
-            }
-          }
-        }}
+            }else{
+              console.log('asdjhasbdhb')
+              setIsError(true)
+          }}
+        }
       >
         {({
           values,
@@ -76,6 +78,9 @@ const Auth = () => {
               placeholder="Please enter password"
               helperText={touched.password && errors.password}
             />
+            {isError && <Typography  className={errorLabel}>
+              Your name or password be wrong 
+            </Typography>} 
             <div className={buttonGroup}>
               <Button
                 type="submit"

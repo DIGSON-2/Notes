@@ -42,10 +42,9 @@ const HomePage = () => {
   }, [ openAddDialog, openChangeDialog])
   const localClear = () => {
     localStorage.clear()
-    navigate('/Register')
+    navigate('/Authorization')
   }
-  console.log(data)
-  if (!token || data ) return <Navigate to="/Authorization" />;
+  if (!token ) return <Navigate to="/Authorization" />;
   return (
     <>
       <header className={header}>

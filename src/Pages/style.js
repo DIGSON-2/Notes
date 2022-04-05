@@ -86,5 +86,9 @@ export const useStyles = makeStyles({
     conteiner: {
         width: '1200px',
         margin: 'auto'
+    },
+    errorLabel : {
+        color: 'red',
+        fontSize: '14px!important'
     }
 })
